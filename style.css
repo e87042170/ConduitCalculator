@@ -1,0 +1,26 @@
+body{
+	/*font-size: 12px;*/
+	background-color: #EFF5FC;
+}
+body>.container{
+	background-color: #fff;
+	margin: 15px auto;
+}
+.navbar {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+	}	
+h2{
+    color: #E31D4C;
+}
+.btn-pri{
+	border-color: #2775CE;
+	color: #2775CE;
+}
+.btn-sec{
+	border-color: #E31D4C;
+	color: #E31D4C;
+}

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Conduit 容量計算</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="./css/bootstrap.min.css">
+		<link rel="stylesheet" href="./css/font-awesome.min.css">
+		<script src="./js/jquery.min.js"></script>
+		<script src="./js/popper.min.js"></script>
+		<script src="./js/bootstrap.min.js"></script>
+		<script src="main.js"></script>
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+
+		<div class="container">
+			<h2>電纜清單</h2>
+			<div class="table-responsive">          
+			  <table id="tbl1" class="table">
+			    <thead>
+			      <tr>
+			        <th style="width: 5%">#</th>
+			        <!-- <th>電纜種類</th> -->
+			        <th style="width: 35%">電纜規格</th>
+			        <th style="width: 10%">外徑</th>
+			        <th style="width: 10%">數量</th>
+			        <th style="width: 20%">備註</th>
+			        <th style="width: 20%">工具</th>
+			      </tr>
+			    </thead>
+			    <tbody></tbody>
+			  </table>
+			</div>
+			<div class="text-right">
+				<button class="btn btn-success" data-toggle="modal" id="addControlCable"> <i class="fa fa-plus-circle"></i> 加入控制電纜</button>
+				<button class="btn btn-success" data-toggle="modal" id="addPowerCable"> <i class="fa fa-plus-circle"></i> 加入電力電纜</button>
+				<button class="btn btn-primary" data-toggle="modal" data-target="#myModal"> <i class="fa fa-plus-circle"></i> 加入電纜</button>
+			</div><br>
+		</div>
+
+		<div class="container">
+			<h2>Conduit 容量計算</h2>
+			<div class="table-responsive">          
+			  <table id="tbl2" class="table">
+			    <thead>
+			      <tr>
+			        <th style="width: 150px;">Cable 規格</th>
+			        <th class="d-none d-lg-table-cell">Cable 外徑(mm)</th>
+			        <th class="d-none d-lg-table-cell">Cable 外徑平方(mm<sup>2</sup>)</th>
+			        <th>Cable 數量</th>
+			        <!-- <th>Cable 外徑平方和小計(mm<sup>2</sup>)</th> -->
+			        <th class="d-none d-lg-table-cell">Cable 外徑平方和總計(mm<sup>2</sup>)</th>
+			        <th class="d-none d-lg-table-cell" style="width: 60px;">佔積因數</th>
+			        <!-- <th>計算多線穿同一管之管徑(mm)</th> -->
+			        <th class="d-none d-lg-table-cell">計算多線穿同一管之管徑(")</th>
+			        <th>選用管徑(")</th>	        
+			      </tr>
+			    </thead>
+			    <tbody>
+			      
+			    </tbody>
+			  </table>
+			</div>
+			<br>
+			<table id="tbl3" class="table col-lg-4 col-md-6">
+			    <tbody>
+			      <tr>
+			        <th>導線數</th>
+			        <td>1</td>
+			        <td>2</td>
+			        <td>>= 3</td>
+			      </tr>
+			      <tr>
+			        <th>佔積因素</th>
+			        <td>0.53</td>
+			        <td>0.31</td>
+			        <td>0.4</td>
+			      </tr>
+			    </tbody>
+			  </table>
+			 <div class="form-group col-lg-4 col-md-6">
+				<label class="" for="sel3">最大管徑: </label>
+			  	<select class="form-control form-control-sm" id="sel3">
+				    <option value="1">1"</option>
+				    <option value="1.5">1-1/2"</option>
+				    <option value="2">2"</option>
+				    <option value="2.5">2-1/2"</option>
+				    <option value="3" selected>3"</option>	
+				    <option value="4">4"(限AL)</option>
+				    <option value="5">5"(限PVC)</option>	    
+			  	</select>
+			</div>
+			<blockquote class="blockquote">
+				<p>計算多線穿同一管之管徑(mm)  =SQRT(Cable外徑平方和總計/佔積因數)</p>
+				<p>交流電力電纜使用金屬管，應注意同組電源需在同一支管內。</p>
+				<p>此配管容量計算僅供參考，實際使用之管徑應考慮施工方法。</p>
+			</blockquote>
+			<div class="text-right">
+				<button id="calculate" class="btn btn-primary"> <i class="fa fa-calculator"></i> 開始計算</button>
+			</div><br>
+		</div>
+
+		<!-- Modal -->
+		  <div class="modal fade" id="myModal" role="dialog">
+		    <div class="modal-dialog">		    
+		      <!-- Modal content-->
+		      <div class="modal-content">
+		        <div class="modal-header">
+		        	<h4 class="modal-title">選擇電纜</h4>
+		          	<button type="button" class="close" data-dismiss="modal">&times;</button>
+		        </div>
+		        <div class="modal-body">
+		        	<div class="row">
+		        		<div class="col-sm-6">
+			        		<div class="form-group">
+							  <label for="sel1">1.選擇電纜種類:</label>
+							  <select class="form-control form-control-sm" id="sel1" size="10">
+							    <option>XLPE</option>
+							    <option>FPVC</option>
+							    <option>CV-S</option>
+							    <option>PVC</option>
+							    <option>IPVV</option>
+							    <option>ITVV</option>
+							    <option>CVVS</option>					    
+							  </select>
+							</div>
+			        	</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+							  <label for="sel2">2.選擇電纜規格:</label>
+							  <select class="form-control form-control-sm" id="sel2" size="10">
+							    
+							  </select>
+							</div>
+						</div>
+		        	</div>
+		        </div>
+		        <div class="modal-footer">
+		        	<button type="button" class="btn btn-outline-primary" data-dismiss="modal">關閉</button>
+		        	<button id="addCable" type="button" class="btn btn-primary">加入清單</button>
+		        </div>
+		      </div>
+		      
+		    </div>
+		  </div>
+			
+
+	</body>
+</html>
